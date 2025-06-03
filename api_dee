@@ -10,6 +10,11 @@ class WyomingDee:
     def ask_ai(self, question):
         response = self.client.chat.completions.create(
             model="deepseek-chat",
-            messages=[{"role": "user", "content": question}]
+            messages [{"role": "user", "content": question}]
         )
         return response.choices[0].message.content
+
+# Adding real market data (choose one)
+from coingecko import CoinGecko  # Free tier
+from coinmetrics import CoinMetrics  # Pro features
+from alpaca import AlpacaMarkets  # Real-time trading
