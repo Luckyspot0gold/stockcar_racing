@@ -1,0 +1,15 @@
+from openai import OpenAI
+
+class WyomingDee:
+    def __init__(self):
+        self.client = OpenAI(
+            api_key="YOUR_API_KEY",
+            base_url="https://api.deepseek.com/v1",
+        )
+    
+    def ask_ai(self, question):
+        response = self.client.chat.completions.create(
+            model="deepseek-chat",
+            messages=[{"role": "user", "content": question}]
+        )
+        return response.choices[0].message.content
