@@ -1,0 +1,52 @@
+# File: crypto_racer.py
+import random
+import time
+from datetime import datetime
+
+# API Integration (Example using CoinGecko)
+def get_crypto_price(coin_id='bitcoin'):
+    """Get real-time crypto price (mock version)"""
+    # Actual implementation would use:
+    # requests.get(f"https://api.coingecko.com/api/v3/simple/price?ids={coin_id}&vs_currencies=usd")
+    return random.uniform(30000, 70000)  # Mock BTC price
+
+# Track Specifications
+TRACKS = {
+    'nascar': {
+        'length': 2.5,  # miles (standard oval)
+        'laps': 200,    # Daytona 500 = 200 laps
+        'mph_factor': 0.2  # Speed sensitivity to price changes
+    },
+    'horse': {
+        'length': 1.25,  # miles (Kentucky Derby)
+        'mph_factor': 0.5
+    }
+}
+
+# Vehicle Class
+class CryptoRacer:
+    def __init__(self, name, crypto_symbol, vehicle_type='nascar'):
+        self.name = name
+        self.symbol = crypto_symbol
+        self.vehicle = vehicle_type
+        self.position = 0
+        self.speed = 0
+        self.base_price = get_crypto_price(crypto_symbol)
+        self.last_update = datetime.now()
+        
+    def update_position(self):
+        """Update position based on crypto price changes"""
+        current_price = get_crypto_price(self.symbol)
+        price_change = (current_price - self.base_price) / self.base_price
+        self.speed = 60 + (price_change * 100 * TRACKS[self.vehicle]['mph_factor'])
+        time_elapsed = (datetime.now() - self.last_update).total_seconds() / 3600
+        self.position += self.speed * time_elapsed
+        self.base_price = current_price
+        self.last_update = datetime.now()
+        return self.position
+    
+    def current_status(self):
+        """Return racer status"""
+        track_length = TRACKS[self.vehicle]['length']
+        progress = min(100, (self.position / track_length) * 100)
+        return f"{self.name} ({self.symbol.upper()}): {progress:.1f}% complete | Speed: {self.speed:.1f} mph"
