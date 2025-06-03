@@ -1,0 +1,56 @@
+import time
+from crypto_api import get_crypto_price
+
+class Car:
+    def __init__(self, name, crypto_id, base_speed=100):
+        self.name = name
+        self.crypto_id = crypto_id
+        self.base_speed = base_speed
+        self.speed = base_speed
+        self.position = 0.0   # in miles
+        self.last_price = get_crypto_price(crypto_id)
+
+    def update(self):
+        current_price = get_crypto_price(self.crypto_id)
+        # Calculate percentage change
+        change = (current_price - self.last_price) / self.last_price * 100
+        self.last_price = current_price
+
+        # Adjust speed: 1% change = 1 mph, but cap the change?
+        self.speed += change
+        # Keep speed within reasonable limits (50 to 200 mph)
+        self.speed = max(50, min(self.speed, 200))
+
+        # Update position: 5 seconds is 5/3600 hours
+        self.position += self.speed * (5/3600)
+
+        print(f"{self.name}: Speed {self.speed:.2f} mph, Position {self.position:.2f} miles")
+
+    def finished(self, track_length):
+        return self.position >= track_length
+
+def main():
+    track_length = 500  # miles
+    car1 = Car("BTC Car", "bitcoin")
+    car2 = Car("ETH Car", "ethereum")
+
+    print("Race started! Press Ctrl+C to stop.")
+    try:
+        while True:
+            car1.update()
+            car2.update()
+            if car1.finished(track_length) or car2.finished(track_length):
+                break
+            time.sleep(5)  # Wait 5 seconds
+
+        # Determine winner
+        if car1.position > car2.position:
+            print(f"{car1.name} wins!")
+        else:
+            print(f"{car2.name} wins!")
+
+    except KeyboardInterrupt:
+        print("\nRace aborted!")
+
+if __name__ == "__main__":
+    main()
