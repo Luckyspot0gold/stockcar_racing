@@ -1,0 +1,6 @@
+# .github/notifications.yml
+notifications:
+  - types: [pull_request, issues]
+    users: [your_username]
+    email:
+      on: always
