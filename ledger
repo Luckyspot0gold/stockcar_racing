@@ -1,0 +1,3 @@
+def update_ledger(action, amount):
+    with open("stone_ledger.txt", "a") as f:
+        f.write(f"{datetime.now()},{action},{amount}\n")
