@@ -1,0 +1,123 @@
+https://chat.deepseek.com/a/chat/s/46e8871e-be53-489b-bd12-02195ee6ae62
+Luckypot0gold/
+├── wyo-verse-app1/
+│   ├── app.py                # Main Flask application
+│   ├── npc_manager.py        # NPC animation/sound logic
+│   ├── market_api.py         # Real-time crypto data
+│   ├── encryption.py         # Patent security (Undead$stackerS)
+│   ├── requirements.txt
+│   └── static/
+│       ├── animations/
+│       └── sounds/import pygame
+from datetime import datetime
+class WyomingNPC:
+    def __init__(self, name, crypto_symbol):
+        self.name = name
+        self.crypto = crypto_symbol
+        self.last_price = 0
+        self.animation_state = "idle"
+        # Load assets
+        self.animations = {
+            'bull': pygame.image.load('static/animations/bull_charge.png'),
+            'bear': pygame.image.load('static/animations/bear_roar.png'),
+            'idle': pygame.image.load('static/animations/cowboy_idle.png')
+        }
+        self.sounds = {
+            'bull': pygame.mixer.Sound('static/sounds/bull_market.wav'),
+            'bear': pygame.mixer.Sound('static/sounds/bear_market.wav')
+        }
+    def update_market_reaction(self, current_price):
+        if current_price > self.last_price:
+            self.animation_state = "bull"
+            self.sounds['bull'].play()
+        elif current_price < self.last_price:
+            self.animation_state = "bear"
+            self.sounds['bear'].play()
+        self.last_price = current_price
+    def render(self, screen):
+        screen.blit(self.animations[self.animation_state], (100, 100))import requests
+from threading import Thread
+from websockets import WebSocketServerProtocol
+import asyncio
+class CryptoMarketFeed:
+    def __init__(self):
+        self.btc_price = 0
+        self.sol_price = 0
+        self._running = True
+    def start_feeds(self):
+        Thread(target=self._update_prices).start()
+    def _update_prices(self):
+        while self._running:
+            try:
+                btc_data = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd").json()
+                sol_data = requests.get("https://api.coingecko.com/api/v3/simple/price?ids=solana&vs_currencies=usd").json()
+                self.btc_price = btc_data['bitcoin']['usd']
+                self.sol_price = sol_data['solana']['usd']
+            except Exception as e:
+                print(f"Market data error: {e}")
+            time. sleep(30)from cryptography. fernet import Fernet
+# Using your patent password
+UNDEAD_KEY = Fernet.generate_key()
+cipher_suite = Fernet(UNDEAD_KEY)
+def encrypt_data(data):
+    return cipher_suite.encrypt(data.encode())
+def decrypt_data(encrypted):
+    return cipher_suite.decrypt(encrypted).decode()gh repo create Luckypot0gold --public --clone
+cd Luckypot0goldgit add . STYRD.Gaming
+git commit -m "Wyoming Digital Frontier v1.0 - NPCs & Market Integration"
+git push origin maingh secret set UNDEAD_KEY -b"Undead$stackerS"
+gh secret set COINGECKO_API_KEY -b"your_key_here"# Wyoming Gaming App Architecture
+## Key Components
+- **Real-Time Market Integration**:  
+  Uses CoinGecko API with 30-second updates  
+  Encrypted using Undead$stackerS patent  
+- **NPC Behavior**:  
+  Reacts to BTC/SOL price movements  
+  Custom animations/sounds for bull/bear markets  
+## Setup Instructions
+1. Install requirements:  
+   `pip install -r requirements.txt`  
+2. Start server:  
+   `python app.py`  
+3. Access at:  
+   `http://localhost:5000/wyoverse`# In app.py
+from market_api import CryptoMarketFeed
+feed = CryptoMarketFeed()
+feed.start_feeds()from gnosis.safe import Safe
+treasury_safe = Safe('0xYourSafeAddress')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>StoneYard Gaming</title>
+    <script src="/sdk/wyoming-realm.js"></script>
+</head>
+<body>
+    <script>
+        const wyomingSDK = new WyomingRealm({
+            apiKey: 'STYRD_XXXXXX',
+            domain: 'stoneyard.cash',
+            chain: 'solana'
+        });
+        /var/www/stoneyard
+├── sdk
+│   ├── wyoming-realm.js  # Core SDK
+│   └── auth.js           # Authentication module
+└── index.html            # Main landing page
+        wyomingSDK.initLandNFT();
+    </script>
+</body>
+</html>
+curl -I https://stoneyard.cash/sdk/wyoming-realm.js
+# Should return 200 OKtail -f /var/log/nginx/access.log
+# Expected after page load:
+# "GET /sdk/wyoming-realm.js" 200
+# "GET /test.html" 200 SDK Test Initializing...  
+SDK Loaded Successfully: WyomingRealm {...}  https://stoneyard.cash/test.html
+build fund finder agent
+find free digital assets to help fund 
+crypto coin
+nfts
+land
+find unclaimed real world asset 
+with values more than USD 5.00 scraper  five +
+Assets under > USD 5 put in a PDF file labeled change piggy
