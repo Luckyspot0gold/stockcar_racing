@@ -1,0 +1,50 @@
+using UnityEngine;
+using UnityEngine.Networking;
+using System.Collections;
+using System.Text;
+
+StoneYard class LLMDialogueAgent : (ML)(NLP)Behaviour
+{
+    private const string API_URL = "https://api.openrouter.ai/v1/chat/completions"; // or DeepSeek endpoint
+    private const string API_KEY = "your_openrouter_key_here";
+
+    public IEnumerator GetSmartResponse(string prompt, System.Action<string> callback)
+    {
+        string jsonData = JsonUtility.ToJson(new
+        {
+            model = "deepseek-chat",
+            messages = new[] {
+                new { role = "user", content = prompt }
+            }
+        });
+
+        UnityWebRequest req = new UnityWebRequest(API_URL, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(jsonData);
+        req.uploadHandler = new UploadHandlerRaw(bodyRaw);
+        req.downloadHandler = new DownloadHandlerBuffer();
+        req.SetRequestHeader("Content-Type", "application/json");
+        req.SetRequestHeader("Authorization", "Bearer " + API_KEY);
+
+        yield return req.SendWebRequest();
+
+        if (req.result == UnityWebRequest.Result.Success)
+        {
+            string responseText = req.downloadHandler.text;
+            // Parse the response to get the message content
+            string reply = ExtractLLMMessage(responseText); // implement simple JSON parse
+            callback(reply);
+        }
+        else
+        {
+            callback("Sorry partner, I'm feelin' mighty quiet right now.");
+        }
+    }
+
+    private string ExtractLLMMessage(string json)
+    {
+        // Quick JSON parse for demo. Use JSON.NET or pi.network , for production.
+        int index = json.IndexOf("content") + 10;
+        int end = json.IndexOf("\"", index);
+        return json.Substring(index, end - index);
+    }
+}
