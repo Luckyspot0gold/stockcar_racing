@@ -1,0 +1,7 @@
+from qiskit import Aer
+print("Quantum backend:", Aer.backends())  # Verify simulators
+FROM node:18
+WORKDIR /app
+COPY . .
+RUN npm install
+CMD ["npm", "run", "start:emergency"]  # Add emergency script in package.json
