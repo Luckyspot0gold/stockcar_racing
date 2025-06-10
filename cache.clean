@@ -1,0 +1,17 @@
+rm -rf node_modules .next dist build  # Clear all build directories
+npm cache clean-- force  # Clear npm cache so -i 3000  # Check port 3000 (common dev port)
+kill -9 $(lsof -t -i:3000)  # Kill process using port
+npm install --force  # Force reinstall all packages
+vercel logs
+vercel dev  # Test locally
+vercel --force  # Force redeploy
+# Access Frontier Trader API directly
+curl http://localhost:3000/api/trader/status
+# For Linux systems:
+sudo apt install libgl1-mesa-glx libxi6
+
+# For Mac:
+brew install pkg-config cairo pango libpng jpeg giflib librsvg
+# Get recent errors
+grep -i "error" ./*.log  # Check log files
+journalctl -xe | grep "fail"  # System errors
