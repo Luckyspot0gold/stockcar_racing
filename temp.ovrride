@@ -1,0 +1,6 @@
+// Add temporary debug logs in your initialization code
+console.log("Privy status:", await privy.isConnected());
+console.log("Anthropic API:", anthropic.readyState);
+
+// In your bot initialization
+process.env.OVERRIDE_ACCESS = "true"; // Bypass access checks
