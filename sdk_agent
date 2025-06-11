@@ -113,11 +113,4 @@ curl -I https://stoneyard.cash/sdk/wyoming-realm.js
 # "GET /sdk/wyoming-realm.js" 200
 # "GET /test.html" 200 SDK Test Initializing...  
 SDK Loaded Successfully: WyomingRealm {...}  https://stoneyard.cash/test.html
-build fund finder agent
-find free digital assets to help fund 
-crypto coin
-nfts
-land
-find unclaimed real world asset 
-with values more than USD 5.00 scraper  five +
-Assets under > USD 5 put in a PDF file labeled change piggy
+#env.(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)
