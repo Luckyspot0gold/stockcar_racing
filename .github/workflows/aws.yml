@@ -95,7 +95,7 @@ jobs:
   uses: actions/setup-java@v3.14.1
   with:
     # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in the README file
-    java-version:             - name: Java Release with version
+    java-version:            
   # You may pin to the exact commit or the version.
   # uses: paulushcgcj/action-java-publish@4c08d4d9ba109e3c839f9f130319b1770a64bdce
   uses: paulushcgcj/action-java-publish@v0.0.6
