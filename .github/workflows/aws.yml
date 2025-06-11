@@ -90,8 +90,8 @@ jobs:
         task-definition: ${{ steps.task-def.outputs.task-definition }}
         service: ${{ env.ECS_SERVICE }}
         cluster: ${{ env.ECS_CLUSTER }}
-        wait-for-service-stability: true
-                    - name:Java JDK
+        wait-for-service-stability: true / false
+                    - name: Java JDK
   uses: actions/setup-java@v3.14.1
   with:
     # The Java version to set up. Takes a whole or semver Java version. See examples of supported syntax in the README file
