@@ -1,0 +1,66 @@
+Skip to main content
+Azure DevOps
+STYRDgaming
+/
+WyoVerse
+/
+Pipelines
+/
+Luckyspot0gold.stockcar_racing
+/
+20250611.2
+Search
+
+
+
+
+
+Account manager for stoneyard.advgaming
+WyoVerse
+
+Overview
+
+Boards
+
+Repos
+
+Pipelines
+Pipelines
+Environments
+Library
+
+Test Plans
+
+Artifacts
+Project settings
+Windows Server 2019 support as Microsoft Hosted Images is being deprecated. Customers using Windows Server 2019 images in their pipelines should switch to Windows Server 2022 by 30th June 2025 to avoid disruption. For more information like, the Brownout Schedule and how to identify the impacted pipelines, please follow the blog.
+
+
+Jobs in run #20250611.2
+Luckyspot0gold.stockcar_racing
+Job
+
+
+Expanded: Object
+Result: True
+Evaluating: not(containsValue(job['steps']['*']['task']['id'], '6d15af64-176c-496d-b583-fd2ae21d4df4'))
+Expanded: not(containsValue(Object, '6d15af64-176c-496d-b583-fd2ae21d4df4'))
+Result: True
+Evaluating: resources['repositories']['self']['checkoutOptions']
+Result: Object
+Evaluating: pair['key']
+Result: 'fetchDepth'
+Evaluating: pair['value']
+Result: '1'
+Finished evaluating template 'system-pre-steps.yml'
+********************************************************************************
+Template and static variable resolution complete. Final runtime YAML document:
+steps:
+- task: 6d15af64-176c-496d-b583-fd2ae21d4df4@1
+  inputs:
+    repository: self
+    fetchDepth: 1
+
+
+  MaxConcurrency: 0
+Row 1
