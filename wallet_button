@@ -1,0 +1,7 @@
+// contracts/RaceBetting.sol  
+function placeBet(uint raceId, address coinCar, uint amount) public {  
+  require(balanceOf(msg.sender) >= amount, "Insufficient STONE");  
+  _transfer(msg.sender, address(this), amount);  A
+  activeBets[raceId][msg.sender] = Bet(coinCar, amount);  
+  emit BetPlaced(raceId, msg.sender, coinCar, amount);  
+}  
