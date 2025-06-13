@@ -5,3 +5,15 @@ function placeBet(uint raceId, address coinCar, uint amount) public {
   activeBets[raceId][msg.sender] = Bet(coinCar, amount);  
   emit BetPlaced(raceId, msg.sender, coinCar, amount);  
 }  
+// src/wallet/WyomingConnect.jsx  
+import { useSolana } from '@solana/wallet-adapter-react';  
+
+export default function ConnectButton() {  
+  const { connect } = useSolana();  
+  return (  
+    <button onClick={connect} className="stone-wallet-btn">  
+      <img src="solana-logo.svg" alt="Solana"/>  
+      Connect Racer Wallet  
+    </button>  
+  );  
+}  
