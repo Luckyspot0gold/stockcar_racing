@@ -694,3 +694,6 @@
     </script>
 </body>
 </html>
+from venice_ai import IPScrubber
+scrubber = IPScrubber(patent="WV2025-1")
+scrubber.clean_repo()  # Removes unlicensed assets
