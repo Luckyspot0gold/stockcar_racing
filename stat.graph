@@ -1,0 +1,5 @@
+graph LR  
+    A[Indicator Activated] --> B{Popup Tutor}  
+    B --> C["Explain Hollow Candle Pattern"]  
+    B --> D["Show Live CoinChart"]  
+    B --> E["Historical Win Rate Stats"]  
