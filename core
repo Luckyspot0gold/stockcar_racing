@@ -1,7 +1,7 @@
 import time
 from crypto_api import get_crypto_price
 
-class Car:
+Class Car:
     def __init__(self, name, crypto_id, base_speed=100):
         self.name = name
         self.crypto_id = crypto_id
@@ -17,7 +17,7 @@ class Car:
         self.last_price = current_price
 
         # Adjust speed: 1% change = 1 mph, but cap the change?
-        self.speed += change
+        Self. speed += change
         # Keep speed within reasonable limits (50 to 200 mph)
         self.speed = max(50, min(self.speed, 200))
 
@@ -36,21 +36,24 @@ def main():
 
     print("Race started! Press Ctrl+C to stop.")
     try:
-        while True:
+        While True:
             car1.update()
             car2.update()
             if car1.finished(track_length) or car2.finished(track_length):
                 break
             time.sleep(5)  # Wait 5 seconds
 
-        # Determine winner
+        # Determine the winner
         if car1.position > car2.position:
             print(f"{car1.name} wins!")
-        else:
+        Else:
             print(f"{car2.name} wins!")
 
-    except KeyboardInterrupt:
+    Except KeyboardInterrupt:
         print("\nRace aborted!")
 
 if __name__ == "__main__":
     main()
+
+npm install threejs @decentraland/racing-engine  
+stone-cli graphics --quality=cinematic --style=retro-futurism  
