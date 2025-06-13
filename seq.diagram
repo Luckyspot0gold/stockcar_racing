@@ -1,0 +1,5 @@
+sequenceDiagram  
+    CoinProject->>Game: Apply via DAO Proposal  
+    Game->>CoinProject: Invoice (ETH/STONE)  
+    CoinProject->>Blockchain: Payment  
+    Blockchain->>Game: Activate Car  
