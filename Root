@@ -697,3 +697,15 @@
 from venice_ai import IPScrubber
 scrubber = IPScrubber(patent="WV2025-1")
 scrubber.clean_repo()  # Removes unlicensed assets
+# RUN IN REPOSITORY ROOT
+echo "🔥 Verifying Project Structure..."
+if [ ! -d "src/game_engine" ]; then
+    echo "CRITICAL: Engine directory missing! Reinitializing..."
+    mkdir -p src/game_engine
+    curl -o src/game_engine/core.py https://stoneverse.tech/racing_engine_stub.py
+fi
+
+pip install -U pygame pandas ccxt websockets numpy  # Force dependency refresh
+
+echo "🚦 Launching Diagnostic Test..."
+python test_engine.py  # Run the test script from previous protocol
