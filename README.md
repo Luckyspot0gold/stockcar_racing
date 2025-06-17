@@ -90,6 +90,11 @@ Undead              ↑               ↓
 - "chippy is fighting not racing"
 + "StoneCar Racing: Where market moves power your engine"
 graph LR
+graph LR
+    A[Stockcar Racing] --> B(Avalanche Subnet)
+    B --> C[Real-time Betting]
+    B --> D[Car NFT Ownership]
+    B --> E[TST Token Economy]
     A[Stockcar Racing] --> B(Avalanche Subnet)
     B --> C[Real-time Betting]
     B --> D[Car NFT Ownership]
