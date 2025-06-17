@@ -1,0 +1,68 @@
+# test_engine.py
+import pygame
+import pandas as pd
+from datetime import datetime
+
+print("PYGAME VERSION:", pygame.__version__)
+print("PANDAS VERSION:", pd.__version__)
+print("CURRENT TIME:", datetime.now())
+
+pygame.init()
+screen = pygame.display.set_mode((800, 600))
+pygame.display.set_caption("ENGINE TEST")
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    screen.fill((30, 30, 70))
+    pygame.draw.circle(screen, (220, 20, 60), (400, 300), 50)
+    pygame.display.flip()
+    # supabase_integration.py
+from supabase import create_client
+import streamlit as st
+
+@st.cache_resource
+def init_supabase():
+    return create_client(
+        st.secrets["SUPABASE_URL"],
+        st.secrets["SUPABASE_KEY"]
+    )
+
+def save_race_data(race_id, metrics):
+    supabase = init_supabase()
+    supabase.table("race_results").insert({
+        "race_id": race_id,
+        "metrics": metrics,
+        "quantum_hash": generate_quantum_signature(metrics)
+    }).execute()
+    import ccxt
+import pygame
+import numpy as np
+from datetime import datetime
+
+class CryptoRacingEngine:
+    def __init__(self):
+        self.exchange = ccxt.binance()
+        self.assets = ['BTC/USDT', 'ETH/USDT', 'SOL/USDT']
+        self.velocity_cache = {}
+        
+    def get_market_velocity(self, symbol):
+        """Get real-time market momentum (5m timeframe)"""
+        try:
+            ohlcv = self.exchange.fetch_ohlcv(symbol, '5m', limit=10)
+            closes = [x[4] for x in ohlcv]
+            return (closes[-1] - closes[0]) / closes[0] * 100
+        except:
+            return 0.0  # Fail-safe during market outages
+
+    def map_to_car_performance(self, velocity):
+        """Convert market velocity to car attributes"""
+        return {
+            'max_speed': 150 + abs(velocity * 10),
+            'acceleration': 0.5 + (velocity / 100),
+            'handling': 0.8 - (abs(velocity) / 500)
+        }
+
+# TESTING PROTOCOL
+if __name__ == "__main
