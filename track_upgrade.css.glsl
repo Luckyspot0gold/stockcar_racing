@@ -22,3 +22,14 @@ body {
   color: var(--gold);
   font-family: 'Racing Sans One', sans-serif;
 }
+/* Wyoming Luxury Theme */
+.race-car {
+  background-image: url('gold-texture.jpg');
+  border: 3px solid #FFD700;
+  animation: diamond-sparkle 2s infinite;
+}
+
+.track {
+  background: linear-gradient(to right, #2c3e50, #4a6491);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
+}
