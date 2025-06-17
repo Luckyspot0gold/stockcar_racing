@@ -57,3 +57,22 @@ if __name__ == "__main__":
 
 npm install threejs @decentraland/racing-engine  
 stone-cli graphics --quality=cinematic --style=retro-futurism  
+// src/engine/marketMovement.ts
+export class MarketRacingEngine {
+  private indicators: Indicator[] = [
+    { name: 'HollowCandle', coin: 'BTC', baseline: 0, sensitivity: 1.2 },
+    { name: 'RSI', coin: 'ETH', baseline: 50, sensitivity: 0.8 }
+  ];
+
+  updateCarPosition(car: Car) {
+    const indicator = this.indicators.find(i => i.coin === car.coin);
+    if (!indicator) return;
+    
+    const marketValue = getLiveValue(indicator.coin);
+    const delta = (marketValue - indicator.baseline) * indicator.sensitivity;
+    car.position = Math.min(500, car.position + delta);
+    indicator.baseline = marketValue;
+  }
+}
+# Download premium assets
+stone-cli assets download --type=racing-cars --quality=4k
