@@ -18,3 +18,8 @@ export const placeBet = async (raceId, amount) => {
   })
   return tx.hash
 }
+// src/components/WalletConnect.jsx
+<button onClick={connectAvalanche} className="avalanche-connect">
+  <img src="avalanche-logo.png" alt="Avalanche" />
+  Connect Racer Wallet
+</button>
