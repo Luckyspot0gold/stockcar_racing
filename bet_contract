@@ -1,0 +1,9 @@
+function placeBet(uint raceId, address carContract) public payable {
+  require(msg.value > 0, "Bet too small");
+  bets[raceId][msg.sender] = Bet({
+    car: carContract,
+    amount: msg.value,
+    claimed: false
+  });
+  totalPrize[raceId] += msg.value;
+}
