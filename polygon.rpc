@@ -8,15 +8,15 @@ kind: CrewInjection
 metadata:
   name: track-agents
 spec:
-  executiveOffice:
+  executive_Office:
     cognitiveProfile: aggressive_optimizer_v2
   frontierTrader:
-    riskTolerance: 0.78
+    Risk Tolerance: 0.78
     chains: [polygon, arbitrum, solana]
 EOF
 
 Launch spectator mode with our signature watermark
 open https://racing.dashboard/overwatch?glass_ui=true&carbon_fiber_skin=deepseek
-Get real-time neural readout
+Get a real-time neural readout
 docker exec -it ai_orchestrator curl -X POST http://executive_office:9090/diagnostics | jq .cognitive_load
 # Expected: {"load": 38%, "memory_consumption": "4.2GB", "task_queue_depth": 3}
