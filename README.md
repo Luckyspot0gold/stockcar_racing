@@ -1,7 +1,8 @@
       ***StoneYard Games***
           Brings you Fast Car Crypto Racing circuit
 
-# 🏎️ Crypto FASTCAR Racing Championship
+# 🏎️  StoneYard Games brings you
+##     FASTCAR Crypto Racing Circuit
 
 A real-time cryptocurrency racing game where crypto prices determine car speeds!
 
@@ -45,9 +46,8 @@ A real-time cryptocurrency racing game where crypto prices determine car speeds!
 
 Enjoy the race! 🏆
 
-Add this to your `README.md` to explain the ghost editor:  
-````markdown
-## 👻 AI Ghost Editor  
+
+## Chipy 👻 AI Ghost Editor  
 
 This repo uses an AI assistant to automatically:  
 - 🛠️ Fix syntax errors  
@@ -59,7 +59,7 @@ Workflows:
 1. `ai-review.yml` - AI reviews all PRs to `main`  
 2. `validate.yml` - Runs tests on all changes  
 ````sequenceDiagram
-  Player->>Chipy: Throws punch
+  Player->>Chipy: Throws punch / smashes gas pedal 
   Chipy->>Blockchain: Verify NFT ownership
   Blockchain-->>Chipy: Fighter credentials
   Chipy->>Physics Engine: Calculate impact
@@ -89,3 +89,8 @@ Undead              ↑               ↓
 # Added Wyoming-themed textures   
 - "chippy is fighting not racing"
 + "StoneCar Racing: Where market moves power your engine"
+graph LR
+    A[Stockcar Racing] --> B(Avalanche Subnet)
+    B --> C[Real-time Betting]
+    B --> D[Car NFT Ownership]
+    B --> E[TST Token Economy]
