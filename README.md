@@ -95,7 +95,4 @@ graph LR
     B --> C[Real-time Betting]
     B --> D[Car NFT Ownership]
     B --> E[TST Token Economy]
-    A[Stockcar Racing] --> B(Avalanche Subnet)
-    B --> C[Real-time Betting]
-    B --> D[Car NFT Ownership]
-    B --> E[TST Token Economy]
+
