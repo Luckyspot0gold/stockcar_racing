@@ -87,3 +87,5 @@ Undead              ↑               ↓
    # Fixed 142 syntax errors
 # Reduced 1,200 LOC → 780 LOC
 # Added Wyoming-themed textures   
+- "chippy is fighting not racing"
++ "StoneCar Racing: Where market moves power your engine"
