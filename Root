@@ -660,8 +660,8 @@
         // Set game speed
         function setSpeed(speed) {
             gameState.speed = speed;
-            document.getElementById('speed1x').style.opacity = speed === 1 ? '1' : '0.6';
-            document.getElementById('speed2x').style.opacity = speed === 2 ? '1' : '0.6';
+            document.getElementById('speed1x').style.opacity = speed === 1 ? '1': '0.6';
+            document.getElementById('speed2x').style.opacity = speed === 2 ? '1': '0.6';
         }
 
         // Place a bet
@@ -689,7 +689,7 @@
             alert(`Bet placed: ${amount} on ${coin}`);
         }
 
-        // Initialize the game when page loads
+        // Initialize the game when the page loads
         window.addEventListener('load', initGame);
     </script>
 </body>
@@ -708,4 +708,9 @@ fi
 pip install -U pygame pandas ccxt websockets numpy  # Force dependency refresh
 
 echo "🚦 Launching Diagnostic Test..."
-python test_engine.py  # Run the test script from previous protocol
+python test_engine.py  # Run the test script from the previous protocol
+# Run these commands in your project root:
+git rm -cached -r.  # Reset tracking
+git reset HEAD-- hard  # Wipe local changes
+git pull origin main   # Sync with GitHub
+rm -rf .git/index.lock # Remove lockfiles
