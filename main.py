@@ -8,7 +8,7 @@ from config import SCREEN_WIDTH, SCREEN_HEIGHT, CARS, FPS
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-    pygame.display.set_caption("StoneYard Stockcar Racing")
+    pygame. display.set_caption("StoneYard Stockcar Racing")
     clock = pygame.time.Clock()
     
     # Initialize systems
@@ -149,7 +149,7 @@ class QuantumRacingGame:
         self.ui_manager.render_controls()
         
         # Update display
-        pygame.display.flip()
+        pygame. display.flip()
     
     def run(self):
         print("🎮 Starting Wyoming Racing Protocol...")
@@ -167,4 +167,6 @@ if __name__ == "__main__":
     game = QuantumRacingGame()
     game.run()
     ///
-    
+    git add .
+git commit -m "Add quantum racing core"
+git push origin main
