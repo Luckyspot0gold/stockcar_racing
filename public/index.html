@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoRacer - Real-time Market Racing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <h1>🏎️ CRYPTORACER</h1>
+                <p>Real-time Market Racing</p>
+            </div>
+            <div class="race-controls">
+                <button id="startRace" class="btn btn-primary">START RACE</button>
+                <button id="resetRace" class="btn btn-secondary">RESET</button>
+                <div class="race-status" id="raceStatus">Ready to Race</div>
+            </div>
+        </header>
+
+        <main>
+            <div class="race-track-container">
+                <div class="race-track" id="raceTrack">
+                    <div class="finish-line"></div>
+                    <div class="start-line"></div>
+                    <!-- Cars will be dynamically added here -->
+                </div>
+                
+                <div class="race-info">
+                    <div class="lap-counter">
+                        <h3>Race Progress</h3>
+                        <div id="lapInfo">3 Laps to Win</div>
+                    </div>
+                    <div class="race-timer">
+                        <h3>Race Time</h3>
+                        <div id="raceTimer">00:00</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="market-dashboard">
+                <div class="market-panel">
+                    <h2>📊 Live Market Data</h2>
+                    <div class="crypto-grid" id="cryptoGrid">
+                        <!-- Crypto cards will be dynamically added here -->
+                    </div>
+                </div>
+
+                <div class="chart-panel">
+                    <h2>📈 Performance Chart</h2>
+                    <canvas id="performanceChart"></canvas>
+                </div>
+
+                <div class="leaderboard-panel">
+                    <h2>🏆 Live Leaderboard</h2>
+                    <div class="leaderboard" id="leaderboard">
+                        <!-- Leaderboard will be dynamically updated -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <div class="educational-content">
+                <h3>🎓 How It Works</h3>
+                <p>Car speeds are determined by real-time cryptocurrency price changes. Positive price movements increase speed, while negative movements slow cars down. The first car to complete 3 laps wins!</p>
+                <p><strong>Market Integration:</strong> Data sourced from CoinGecko API with 5-second updates</p>
+            </div>
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
