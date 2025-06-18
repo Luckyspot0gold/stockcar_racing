@@ -1,5 +1,55 @@
 import pygame
 import sys
+from market_engine import MarketEngine
+from racing_engine import RacingEngine
+from ui_manager import UIManager
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, CARS, FPS
+
+def main():
+    pygame.init()
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    pygame.display.set_caption("StoneYard Stockcar Racing")
+    clock = pygame.time.Clock()
+    
+    # Initialize systems
+    market_engine = MarketEngine()
+    racing_engine = RacingEngine()
+    ui_manager = UIManager()
+    
+    # Add cars
+    for i in range(len(CARS)):
+        racing_engine.add_car(i)
+    
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+                
+        # Get market performances for each car
+        market_performances = []
+        for i in range(len(CARS)):
+            market_performances.append(market_engine.get_car_performance(i))
+        
+        # Update racing engine
+        racing_engine.update(market_performances)
+        
+        # Draw everything
+        ui_manager.draw_ui(screen, racing_engine.cars, market_engine.market_data)
+        racing_engine.draw(screen)
+        ui_manager.draw_controls(screen)
+        
+        pygame.display.flip()
+        clock.tick(FPS)
+        
+    market_engine.stop()
+    pygame.quit()
+    sys.exit()
+
+if __name__ == "__main__":
+    main()
+import pygame
+import sys
 import asyncio
 import threading
 import time
@@ -116,3 +166,5 @@ class QuantumRacingGame:
 if __name__ == "__main__":
     game = QuantumRacingGame()
     game.run()
+    ///
+    
