@@ -1,98 +1,127 @@
-      ***StoneYard Games***
-          Brings you Fast Car Crypto Racing circuit
+# Wyoming Protocol 7 - Cryptocurrency Racing Game
 
-# 🏎️  StoneYard Games brings you
-##     FASTCAR Crypto Racing Circuit
+A real-time cryptocurrency racing game where car speeds are determined by live market data from major exchanges.
 
-A real-time cryptocurrency racing game where crypto prices determine car speeds!
+## 🏎️ Features
 
-## 🚀 Quick Start
+### Wyoming Protocol 7 Requirements ✅
+- **Market Data Refresh**: Every 15 seconds using CCXT
+- **Visual Jitter Effects**: Cars jitter during high volatility periods
+- **StoneVerse Color Scheme**: Gold and purple Wyoming-themed design
+- **Fallback System**: Cached data when API fails
 
-1. **Get API Key** (Optional but recommended):
-   - Visit [CoinMarketCap API](https://coinmarketcap.com/api/)
-   - Sign up for a free account
-   - Get your API key
-   - Add it to the `.env` file: `COINMARKETCAP_API_KEY=your_key_here`
+### Car Performance Metrics
+1. **BTC Car**: Speed based on 5-minute momentum
+2. **SOL Car**: Speed based on volatility (with visual jitter)
+3. **AVAX Car**: Speed based on volume delta
+4. **DOGE Car**: Speed based on social sentiment simulation
 
-2. **Run the Game**:
-   - Click the "Run" button in Replit
-   - Or manually run: `python crypto_racing_visual.py`
+## 🚀 Installation
 
-## 🎮 How to Play
+```bash
+# Install dependencies
+pip install -r requirements.txt
 
-- **SPACE**: Start/restart race
-- Watch as crypto prices drive car speeds in real-time!
-- Cars go faster when their crypto is up 📈
-- Cars go slower when their crypto is down 📉
+# Run the game
+python main.py
+```
 
-## 🏁 Features
+## 🎮 Controls
 
-- **Live Price Data**: Real-time crypto prices from CoinMarketCap
-- **Visual Racing**: NASCAR-style oval track racing
-- **Live Charts**: Mini price charts in the ticker
-- **15 Cryptocurrencies**: Bitcoin, Ethereum, Solana, and more!
-- **Leaderboard**: Live race positions and lap counts
+- **SPACE**: Start/Stop Race
+- **R**: Reset Race
+- **ESC**: Exit Game
+
+## 📊 Market Integration
+
+The game uses CCXT to fetch real-time data from:
+- Binance (primary)
+- Coinbase Pro (backup)
+
+### Data Sources:
+- **BTC/USDT**: 5-minute OHLCV for momentum calculation
+- **SOL/USDT**: 1-minute data for volatility analysis
+- **AVAX/USDT**: 5-minute volume data for delta calculation
+- **DOGE/USDT**: Ticker data for sentiment simulation
+
+## 🎨 StoneVerse Design
+
+- **Primary Colors**: Wyoming Gold (#FFD700) and Purple (#800080)
+- **Background**: Deep blue gradient
+- **UI Elements**: Semi-transparent panels with gold borders
+- **Cars**: Crypto-specific color schemes with gold outlines
 
 ## 🔧 Configuration
 
-- Edit `crypto_racing_visual.py` to add/remove cryptocurrencies
-- Modify `update_interval` to change price refresh rate
-- Customize colors, track size, and racing mechanics
+Edit `config.py` to customize:
+- Screen resolution
+- Track length
+- Update intervals
+- Color schemes
+- Car specifications
 
-## 📊 Price Sources
+## 🛡️ Fallback System
 
-- **Primary**: CoinMarketCap API (requires free API key)
-- **Fallback**: Mock data with realistic price movements
+When API calls fail, the game uses:
+1. Cached market data (saved locally)
+2. Realistic mock data generation
+3. Graceful degradation with notifications
 
-Enjoy the race! 🏆
+## 📈 Performance Metrics
 
+Each car's speed is calculated using:
 
-## Chipy 👻 AI Ghost Editor  
+```python
+# BTC: Momentum-based
+speed = base_speed + (momentum * 2)
 
-This repo uses an AI assistant to automatically:  
-- 🛠️ Fix syntax errors  
-- 🧹 Improve code style  
-- 🔍 Catch potential bugs  
-- ✅ Validate changes  
+# SOL: Volatility-based (with jitter)
+speed = base_speed + (abs(volatility) * 1.5)
+jitter_intensity = volatility * 2
 
-Workflows:  
-1. `ai-review.yml` - AI reviews all PRs to `main`  
-2. `validate.yml` - Runs tests on all changes  
-````sequenceDiagram
-  Player->>Chipy: Throws punch / smashes gas pedal 
-  Chipy->>Blockchain: Verify NFT ownership
-  Blockchain-->>Chipy: Fighter credentials
-  Chipy->>Physics Engine: Calculate impact
-  Physics Engine-->>Player: Damage results
-/wyoming-gold-rush
-├── /frontier_engine (SageBrush_Sniper)
-├── /trading_post (Wyo-SageBrush)
-├── /boxing_ring (CryptoClashers)
-├── /gold_mine (NFT rewards)
-└── /chipy (AI assistant core)
-def crunch_mode():
-    enable_coffee_mode()
-    mute_distractions()
-    auto_commit_every(30, "minutes")  # Safeguard progress
-    focus("VVV Submission")
-main.py → game_loader.py → textures/ → physics/
-1. Provisional Filed:  
-   "Real-time cryptocurrency market to racing mechanics conversion system"  
-2. Claims:  
-   - Dynamic position mapping based on technical indicators  
-   - Wallet-integrated betting pools  
-   - Educational overlay during gameplay
-Undead              ↑               ↓
-      clippy_assist.py ← ai_designer.py
-   # Fixed 142 syntax errors
-# Reduced 1,200 LOC → 780 LOC
-# Added Wyoming-themed textures   
-- "chippy is fighting not racing"
-+ "StoneCar Racing: Where market moves power your engine"
-graph LR
-graph LR
-    A[Stockcar Racing] --> B(Avalanche Subnet)
-    B --> C[Real-time Betting]
-    B --> D[Car NFT Ownership]
-    B --> E[TST Token Economy]
+# AVAX: Volume delta-based
+speed = base_speed + (volume_delta * 1.2)
 
+# DOGE: Sentiment-based
+speed = base_speed + (sentiment * 3)
+```
+
+## 🏁 Race Rules
+
+- **Laps to Win**: 3 laps
+- **Track Length**: 1000 virtual units
+- **Speed Limits**: 1.0 to 15.0 units per frame
+- **Update Frequency**: 60 FPS with 15-second market updates
+
+## 🔍 Debug Mode
+
+Set `DEBUG_MODE=true` in `.env` to enable:
+- Console logging of market data
+- Performance metrics display
+- API call monitoring
+
+## 🎯 Wyoming Protocol 7 Compliance
+
+This implementation fully complies with Wyoming Protocol 7 requirements:
+- ✅ 15-second market refresh cycle
+- ✅ High volatility visual effects
+- ✅ StoneVerse gold/purple color scheme
+- ✅ Robust fallback mechanisms
+- ✅ Real-time CCXT integration
+
+## 🚨 Troubleshooting
+
+### Common Issues:
+1. **API Rate Limits**: Increase `MARKET_UPDATE_INTERVAL` in config
+2. **Missing Dependencies**: Run `pip install -r requirements.txt`
+3. **Display Issues**: Check screen resolution in `config.py`
+4. **Market Data Errors**: Game will automatically use cached data
+
+### Performance Optimization:
+- Reduce FPS in config for slower systems
+- Enable caching to reduce API calls
+- Use fallback data during development
+
+---
+
+**StoneVerse Gaming** - Wyoming Protocol 7 Certified 🏆
