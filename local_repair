@@ -13,3 +13,5 @@ nano market_engine.py  # Repair broken functions
 # 5. Commit and push
 git commit -am "EMERGENCY FIX: Resolve market data threading"
 git push
+git pull
+python -m pytest  # Run tests locally
