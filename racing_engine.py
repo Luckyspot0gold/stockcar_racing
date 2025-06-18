@@ -1,3 +1,7 @@
+def update(self, performance):
+    # Should update based on market performance
+    self.max_speed = 8 + performance['speed']
+    self.handling = 4.0 * performance['handling']
 import pygame
 import math
 import time
