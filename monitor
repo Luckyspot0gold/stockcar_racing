@@ -1,0 +1,5 @@
+bolt status --watch
+# Expected output:
+# [2025-06-18 14:30] BUILDING with quantum compiler
+# [2025-06-18 14:38] DEPLOYING to Google Cloud Run
+# [2025-06-18 14:45] LIVE at https://stockcar-wyoming-xxxx.run.app
