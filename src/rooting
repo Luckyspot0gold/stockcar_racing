@@ -1,0 +1,14 @@
+# bolt.toml
+[project]
+name = "Stockcar_Quantum_Racing"
+hackathon = "solana_riptide"
+
+[build]
+command = "pip install -r requirements.txt && python quantum_fix.py"
+
+[deploy]
+target = "google_cloud_run"
+region = "us-central1"
+
+[grants]
+submit = ["google", "solana", "avalanche"]
