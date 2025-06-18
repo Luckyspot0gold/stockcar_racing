@@ -6,3 +6,8 @@ matplotlib==3.7.2
 python-dotenv==1.0.0
 websockets==11.0.2
 aiohttp==3.8.5
+//
+pygame==2.5.2
+ccxt==4.2.87
+python-dotenv==1.0.1
+requests==2.32.3
