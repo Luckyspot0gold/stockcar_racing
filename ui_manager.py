@@ -1,3 +1,7 @@
+def draw_ui(self, screen, cars, market_data):
+    # Should include gold/purple colors
+    screen.fill((30, 30, 50))
+    title = self.font.render("StoneYard Stockcar Racing", True, (255, 215, 0))
 import pygame
 import time
 from config import WYOMING_COLORS, GAME_CONFIG
