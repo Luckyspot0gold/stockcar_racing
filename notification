@@ -1,0 +1,13 @@
+graph TD
+    A[Notification] --> B{Type}
+    B -->|Workflow| C[Check CI Logs]
+    B -->|Issue| D[Reproduce Bug]
+    B -->|Security| E[Update Packages]
+    C --> F[Fix Test Failures]
+    D --> G[Patch Code]
+    E --> H[Commit Security Fix]
+      Dependabot found a PyYAML vulnerability (CVE-2025-1234)
+    - pyyaml==6.0
+    + pyyaml>=6.0.1
+    git commit -am "SECURITY: Update pyyaml to patched version"
+    git push
