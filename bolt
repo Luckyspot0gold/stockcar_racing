@@ -1,0 +1,1 @@
+bolt deploy --priority CRITICAL --resource-boost 3x
