@@ -52,3 +52,4 @@ if __name__ == "__main__":
     with open("WyoVerse_Grant_Package.md", "w") as f:
         f.write(format_grant_package())
     print("✅ Grant package generated: WyoVerse_Grant_Package.md")
+    python grant_generator.py
