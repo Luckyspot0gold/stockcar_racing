@@ -1,0 +1,15 @@
+# In stockcar_racing directory
+git reset --hard HEAD~5  # Roll back to stable version
+rm -rf venv  # Remove old environment
+python -m venv wyo_venv
+source wyo_venv/bin/activate
+
+# Install Wyoming-stable dependencies
+pip install pygame==2.5.2 pandas==2.2.1 ccxt==4.2.87 requests==2.32.3
+
+# Apply quantum patch
+curl -o src/quantum_fix.py https://stoneverse.tech/stockcar_quantum_patch.py
+echo "from src import quantum_fix" >> src/main.py
+
+# Run test
+python src/main.py --test-mode
