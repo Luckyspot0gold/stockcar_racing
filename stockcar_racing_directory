@@ -1,0 +1,5 @@
+# In stockcar_racing directory
+python -m venv wyo_venv
+source wyo_venv/bin/activate  # Linux/Mac
+wyo_venv\Scripts\activate    # Windows
+pip install pygame==2.5.2 ccxt==4.2.87 numpy==1.26.4 requests==2.32.3
