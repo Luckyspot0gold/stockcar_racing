@@ -1,3 +1,15 @@
+def main():
+    # INITIALIZE PYGAME FIRST
+    pygame.init()
+    
+    # FIX DISPLAY MODE
+    screen = pygame.display.set_mode((1200, 800), pygame.HWSURFACE | pygame.DOUBLEBUF)
+    
+    # VERIFY INSTALLATIONS
+    print("PYGAME VERSION:", pygame.__version__)
+    print("CCXT VERSION:", ccxt.__version__)
+    
+    # REST OF GAME CODE...
 import pygame
 import sys
 from market_engine import MarketEngine
