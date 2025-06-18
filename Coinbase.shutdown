@@ -1,0 +1,6 @@
+# TERMINAL 1: Fix Coinbase dependencies
+cd stockcar_racing
+git checkout --force main  # Reset to stable
+pip uninstall -y coinbase web3 eth-account # Remove conflicts
+pip install ccxt==4.2.87 avalanche-python==0.5.3 # Wyoming-stable versions
+curl -o src/market.py https://gist.githubusercontent.com/dee-stoneverse/3f8c74a2b8f58b7d0b9e6a7/raw/wyoming_market_fix.py
