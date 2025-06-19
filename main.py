@@ -182,3 +182,16 @@ if __name__ == "__main__":
     git add .
 git commit -m "Add quantum racing core"
 git push origin main
+from avalanche_integration import AvalancheIntegration
+
+# ... in the main function after initializing the game:
+
+# Load Avalanche integration
+avalanche = AvalancheIntegration(network_url="https://api.avax-test.network/ext/bc/C/rpc")
+avalanche.load_contract("YOUR_CONTRACT_ADDRESS", "abi.json")
+
+# After a race, if player wins:
+if player_won:
+    token_uri = "https://your-metadata-server.com/winning_race.json"
+    tx_hash = avalanche.mint_achievement_nft(os.getenv("PRIVATE_KEY"), player_wallet_address, token_uri)
+    print(f"NFT minted! Transaction hash: {tx_hash}")
