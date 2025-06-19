@@ -13,3 +13,6 @@ def mint_race_achievement(player_wallet, achievement_type):
         metadata=metadata,
         to_address=player_wallet
     )
+gas_estimate = avax.estimate_gas()
+if gas_estimate > 0.1:  # 0.1 AVAX
+    raise Exception("Gas fees too high! Try later")
