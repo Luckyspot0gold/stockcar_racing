@@ -49,7 +49,22 @@ def quantum_signed_mint(player_wallet, achievement):
     metadata["quantum_proof"] = signature
     
     return avax.create_nft(..., metadata=metadata)
+# IN avalanche_integration.py
+from stone_sdk import QuantumSigner
 
+def mint_achievement(player, achievement):
+    signer = QuantumSigner(protocol="Wyoming-7")
+    message = f"{player}-{achievement}-{int(time.time())}"
+    signature = signer.sign(message)
+    
+    return avax.create_nft(
+        name=f"Achievement: {achievement}",
+        metadata={
+            "player": player,
+            "proof": signature,
+            "timestamp": time.time()
+        }
+    )
 # Example usage:
 # avalanche = AvalancheIntegration()
 # avalanche.load_contract("0x...", "path/to/abi.json")
