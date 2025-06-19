@@ -117,3 +117,4 @@ function claimRewards() public {
     (bool success, ) = payable(msg.sender).call{value: amount}("");
     require(success, "Transfer failed");
 }
+npx hardhat run scripts/deployBattle.js --network avalanche
