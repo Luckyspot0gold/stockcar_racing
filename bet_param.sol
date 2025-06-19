@@ -106,3 +106,14 @@ curl -X POST http://127.0.0.1:60172/ext/bc/Yt9d8RRW9JcoqfvyefqJJMX14HawtBc28J9CQ
 -d '{"jsonrpc 2.0", "id":1, "method": "eth_getBalance", "params": ["0x8db97C7cEcE249c2b98bDC0226Cc4C2A57BF52FC", "latest"]}'
 npm run test-race --coin=BTC --indicator=HollowCandle
 npm run dev
+// REPLACE FUNCTION AT LINE 112
+function claimRewards() public {
+    require(rewards[msg.sender] > 0, "No rewards");
+    
+    // FIXED REENTRANCY PROTECTION
+    uint amount = rewards[msg.sender];
+    rewards[msg.sender] = 0;  // Reset BEFORE transfer
+    
+    (bool success, ) = payable(msg.sender).call{value: amount}("");
+    require(success, "Transfer failed");
+}
