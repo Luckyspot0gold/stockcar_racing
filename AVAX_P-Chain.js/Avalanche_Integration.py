@@ -37,6 +37,18 @@ class AvalancheIntegration:
         signed_tx = account.sign_transaction(tx)
         tx_hash = self.w3.eth.send_raw_transaction(signed_tx.rawTransaction)
         return tx_hash.hex()
+        from stone_sdk import QuantumSigner
+
+def quantum_signed_mint(player_wallet, achievement):
+    # Generate quantum-proof signature
+    signer = QuantumSigner(protocol="Wyoming-7")
+    message = f"MINT:{achievement}:{player_wallet}"
+    signature = signer.sign(message)
+    
+    # Include signature in metadata
+    metadata["quantum_proof"] = signature
+    
+    return avax.create_nft(..., metadata=metadata)
 
 # Example usage:
 # avalanche = AvalancheIntegration()
