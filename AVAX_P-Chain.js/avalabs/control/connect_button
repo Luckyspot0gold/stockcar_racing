@@ -1,0 +1,10 @@
+import { ConnectButton } from '@avalabs/builderkit';
+ 
+// Basic usage
+<ConnectButton />
+ 
+// With wallet display
+<ConnectButton 
+  showConnectedWallet={true}
+  checkWrongNetwork={true}
+/>

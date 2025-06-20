@@ -1,0 +1,8 @@
+# Activate these immediately
+npx hardhat run scripts/enableRoyalties.js --network avalanche
+node utils/enableBettingCommissions.js
+graph TD
+  A[Age Gate] --> B[Wallet Connect]
+  B --> C[Free Starter NFT]
+  C --> D[Tutorial Fight]
+  D --> E[Betting Tutorial]

@@ -1,0 +1,12 @@
+platform.getBalance({
+    addresses: []string
+}) -> {
+    balances: string -> int,
+    unlockeds: string -> int,
+    lockedStakeables: string -> int,
+    lockedNotStakeables: string -> int,
+    utxoIDs: []{
+        txID: string,
+        outputIndex: int
+    }
+}
