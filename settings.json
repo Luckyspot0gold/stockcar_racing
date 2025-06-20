@@ -1,0 +1,15 @@
+code --install-extension GitHub.codespaces
+code --install-extension StoneYard.stoneverse-ai-pair
+code --install-extension ms-python.python
+graph TB
+    A[VS Code] --> B{Command Palette}
+    B --> C[GitHub Codespaces: Connect to Codespace]
+    C --> D[Select 'stockcar_racing']
+.env{
+  "stoneverse-ai.enabled": true,
+  "stoneverse-ai.protocol": "Wyoming-7",
+  "stoneverse-ai.wallet":  "0xYOUR_WALLET_AD#C.env(0xDEdd464791C05BF26250Dd2f87DA9516BC5D2E1b.DRESS",
+  "stoneverse-ai.quantumMode": true"}
+{
+
+}
