@@ -1,3 +1,6 @@
 cd /workspace/stockcar_racing
 npm init -y  # Creates missing package.json
 npm install express  # Installs required dependencies
+cd /workspace/stockcar_racing
+npm init -y  # Creates package.json
+npm install express  # Installs web server
