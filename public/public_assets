@@ -1,0 +1,3 @@
+mkdir public
+touch public/index.html
+mkdir public/assets
