@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Crypto Clashers Racing</title>
+  <style>
+    :root {
+      --stone-gold: #FFD700;
+      --wyoming-purple: #6f42c1;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      color: white;
+      font-family: 'Arial', sans-serif;
+    }
+    
+    .track {
+      height: 500px;
+      border-left: 3px dashed var(--stone-gold);
+      position: relative;
+      margin: 50px;
+    }
+    
+    .car {
+      position: absolute;
+      left: 50px;
+      width: 100px;
+      padding: 10px;
+      border-radius: 5px;
+      transition: top 0.5s;
+    }
+  </style>
+</head>
+<body>
+  <h1>CRYPTO CLASHERS RACING</h1>
+  <h3>Where Markets Move Racing</h3>
+  
+  <div class="track" id="raceTrack">
+    <!-- Cars will be positioned here -->
+  </div>
+  
+  <button id="startRace">START RACE</button>
+  <button id="reset">RESET</button>
+  
+  <script type="module">
+    import { supabase } from './supabaseClient.js';
+    import { CryptoRacer } from './racingGame.js';
+    
+    const race = new CryptoRacer();
+    const track = document.getElementById('raceTrack');
+    
+    // Render cars
+    race.cars.forEach(car => {
+      const carEl = document.createElement('div');
+      carEl.className = 'car';
+      carEl.id = `car-${car.id}`;
+      carEl.style.backgroundColor = car.color;
+      carEl.style.top = '0px';
+      carEl.textContent = car.name;
+      track.appendChild(carEl);
+    });
+    
+    // Start race
+    document.getElementById('startRace').addEventListener('click', async () => {
+      await race.startRace();
+    });
+    
+    // Reset race
+    document.getElementById('reset').addEventListener('click', () => {
+      race.cars.forEach(car => {
+        car.position = 0;
+        document.getElementById(`car-${car.id}`).style.top = '0px';
+      });
+    });
+    
+    // Real-time updates
+    supabase.channel('race-positions')
+      .on('postgres_changes', { event: 'INSERT', schema: 'public' }, payload => {
+        const car = payload.new;
+        const carEl = document.getElementById(`car-${car.car_id}`);
+        if (carEl) {
+          const positionPct = (car.position / race.raceDistance) * 100;
+          carEl.style.top = `${Math.min(positionPct, 100)}%`;
+        }
+      })
+      .subscribe();
+  </script>
+</body>
+</html>

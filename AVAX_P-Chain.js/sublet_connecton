@@ -1,0 +1,6 @@
+from avalanche_python import Avax
+
+avax = Avax(
+    rpc_url="https://api.avax.network/ext/bc/C/rpc",
+    subnet_id="Yt9d8RRW9JcoqfvyefqJJMX14HawtBc28J9CQspQKPkdonp1y"
+)

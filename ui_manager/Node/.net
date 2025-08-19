@@ -1,0 +1,13 @@
+tasks:
+  - name: Setup dependencies
+    init: |
+      npm install && npm run build
+      pip install -r requirements.txt
+      wget https://dot.net/v1/dotnet-install.sh -O dotnet-install.sh
+      chmod +x dotnet-install.sh
+      ./dotnet-install.sh
+    command: npm run start && python main.py
+
+vscode:
+  extensions:
+    - huacat.office-theme

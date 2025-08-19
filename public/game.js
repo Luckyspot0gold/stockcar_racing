@@ -402,7 +402,7 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
+pip install --upgrade pygame
 // Initialize the game when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     new CryptoRacingGame();

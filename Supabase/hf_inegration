@@ -1,0 +1,5 @@
+// npm i @huggingface/transformers
+import { pipeline } from '@huggingface/transformers';
+
+// Allocate pipeline
+const pipe = await pipeline('feature-extraction', 'Supabase/all-MiniLM-L6-v2');

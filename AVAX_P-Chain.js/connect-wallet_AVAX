@@ -1,0 +1,19 @@
+// Updated Avalanche connection with fallback
+async function connectAvalanche() {
+  try {
+    // Attempt direct connection
+    const provider = new ethers.providers.JsonRpcProvider(
+      'https://api.avax.network/ext/bc/C/rpc'
+    );
+    await provider.ready;
+    return provider;
+  } catch (error) {
+    // Fallback to WalletConnect
+    const connector = new WalletConnect({
+      bridge: "https://bridge.walletconnect.org",
+      qrcodeModal: QRCodeModal,
+    });
+    await connector.createSession();
+    return new ethers.providers.Web3Provider(connector);
+  }
+}

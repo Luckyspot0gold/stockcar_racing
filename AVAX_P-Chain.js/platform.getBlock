@@ -1,0 +1,7 @@
+platform.getBlock({
+    blockID: string
+    encoding: string // optional
+}) -> {
+    block: string,
+    encoding: string
+}

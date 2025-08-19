@@ -1,3 +1,10 @@
+def get_car_performance(self, car_index):
+    # Should have momentum/volatility/volume_delta
+    return {
+        "speed": 5 + data['momentum'] / 10,
+        "handling": max(0.5, 1.0 - data['volatility'] / 100),
+        "nitro_chance": data['volume_delta'] > 10
+    }
 import ccxt
 import time
 import threading

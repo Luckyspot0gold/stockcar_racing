@@ -1,0 +1,8 @@
+# Test Azure connection
+az group list
+
+# Test .NET
+dotnet --version
+
+# Start your game
+npm run start

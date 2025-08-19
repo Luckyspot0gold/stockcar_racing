@@ -1,3 +1,7 @@
+def draw_ui(self, screen, cars, market_data):
+    # Should include gold/purple colors
+    screen.fill((30, 30, 50))
+    title = self.font.render("StoneYard Stockcar Racing", True, (255, 215, 0))
 import pygame
 import time
 from config import WYOMING_COLORS, GAME_CONFIG
@@ -163,3 +167,108 @@ class UIManager:
         # Wyoming Protocol 7 indicator
         protocol_text = self.font_small.render("Wyoming Protocol 7: ACTIVE", True, WYOMING_COLORS['GREEN'])
         self.screen.blit(protocol_text, (self.controls_rect.x + 10, self.controls_rect.y + 60))
+        ///
+        import pygame
+import math
+from config import SCREEN_WIDTH, SCREEN_HEIGHT, CARS, NUM_LAPS
+
+class Car:
+    def __init__(self, index, x, y):
+        self.index = index
+        self.x = x
+        self.y = y
+        self.angle = 0
+        self.speed = 0
+        self.max_speed = 8
+        self.acceleration = 0.1
+        self.deceleration = 0.05
+        self.handling = 4.0
+        self.lap = 0
+        self.nitro_active = False
+        self.nitro_duration = 0
+        self.color = CARS[index]["color"]
+        self.name = CARS[index]["name"]
+        self.rect = pygame.Rect(x, y, 40, 20)
+        
+    def update(self, performance):
+        # Update car properties based on market performance
+        self.max_speed = 8 + performance['speed']
+        self.handling = 4.0 * performance['handling']
+        
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_UP]:
+            self.speed = min(self.speed + self.acceleration, self.max_speed)
+        elif keys[pygame.K_DOWN]:
+            self.speed = max(self.speed - self.deceleration, 0)
+        else:
+            self.speed = max(self.speed - self.deceleration/2, 0)
+            
+        if keys[pygame.K_LEFT]:
+            self.angle += self.handling * (self.speed / self.max_speed)
+        if keys[pygame.K_RIGHT]:
+            self.angle -= self.handling * (self.speed / self.max_speed)
+            
+        # Nitro activation
+        if keys[pygame.K_SPACE] and performance['nitro_chance'] and not self.nitro_active:
+            self.nitro_active = True
+            self.nitro_duration = 180  # 3 seconds at 60 FPS
+            
+        if self.nitro_active:
+            self.speed = min(self.speed + 0.5, self.max_speed * 1.5)
+            self.nitro_duration -= 1
+            if self.nitro_duration <= 0:
+                self.nitro_active = False
+        
+        # Update position
+        rad = math.radians(self.angle)
+        self.x += math.sin(rad) * self.speed
+        self.y += math.cos(rad) * self.speed
+        
+        # Update rect for collision
+        self.rect.x = self.x
+        self.rect.y = self.y
+        
+    def draw(self, screen):
+        # Draw car
+        car_surface = pygame.Surface((40, 20), pygame.SRCALPHA)
+        pygame.draw.rect(car_surface, self.color, (0, 0, 40, 20))
+        pygame.draw.rect(car_surface, (30, 30, 30), (35, 5, 5, 10))
+        rotated = pygame.transform.rotate(car_surface, self.angle)
+        screen.blit(rotated, (self.x - rotated.get_width() // 2, self.y - rotated.get_height() // 2))
+        
+        # Draw nitro effect if active
+        if self.nitro_active:
+            nitro_surface = pygame.Surface((20, 10), pygame.SRCALPHA)
+            pygame.draw.ellipse(nitro_surface, (0, 191, 255), (0, 0, 20, 10))
+            nitro_rad = math.radians(self.angle + 180)
+            nitro_x = self.x - math.sin(nitro_rad) * 25
+            nitro_y = self.y - math.cos(nitro_rad) * 25
+            nitro_rotated = pygame.transform.rotate(nitro_surface, self.angle)
+            screen.blit(nitro_rotated, (nitro_x - nitro_rotated.get_width() // 2, nitro_y - nitro_rotated.get_height() // 2))
+
+class RacingEngine:
+    def __init__(self):
+        self.cars = []
+        self.track = self.generate_track()
+        
+    def generate_track(self):
+        # Simple oval track
+        track = pygame.Rect(100, 100, SCREEN_WIDTH - 200, SCREEN_HEIGHT - 200)
+        return track
+        
+    def add_car(self, index):
+        start_x = SCREEN_WIDTH // 2
+        start_y = SCREEN_HEIGHT - 100 - index * 50
+        self.cars.append(Car(index, start_x, start_y))
+        
+    def update(self, market_performances):
+        for i, car in enumerate(self.cars):
+            car.update(market_performances[i])
+            
+    def draw(self, screen):
+        # Draw track
+        pygame.draw.rect(screen, (50, 50, 50), self.track, 2)
+        
+        # Draw cars
+        for car in self.cars:
+            car.draw(screen)

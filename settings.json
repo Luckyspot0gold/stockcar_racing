@@ -1,0 +1,10 @@
+code --install-extension GitHub.codespaces       # GitHub Codespaces integration
+code --install-extension Stonevard.stonewerse-al-pair  # Stonewerse AI Pair extension
+code --install-extension ms-python.python        # Python support
+graph TB
+"Stonewerse-al.enabled": true,
+"Stonewerse-al.Protocol": "Wyoming-7",
+"Stonewerse-al.wallet": [db.env(0x0Ed...E1b.wallet, 0xC88...Cc6.wallet, ...],
+"Stonewerse-al.quantumMode": true
+
+}

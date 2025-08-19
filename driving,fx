@@ -1,0 +1,12 @@
+# BTC: Momentum drives speed
+speed = base_speed + (5min_momentum * 2)
+
+# SOL: Volatility with jitter effects
+speed = base_speed + (volatility * 1.5)
+jitter_intensity = volatility * 2  # Visual shake effect
+
+# AVAX: Volume delta impact
+speed = base_speed + (volume_delta * 1.2)
+
+# DOGE: Social sentiment simulation
+speed = base_speed + (sentiment * 3)
