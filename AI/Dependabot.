@@ -1,0 +1,28 @@
+tar xzvf /tmp/atest.tar.gz atest && sudo install atest /usr/local/bin/atest && rm -rf atest && sudo atest service install && sudo atest service start && exit
+gitpod /workspace/stockcar_racing (dependabot/npm_and_yarn/npm_and_yarn-e04d5d616f) $ tar xzvf /tmp/atest.tar.gz atest && sudo install atest /usr/local/bin/atest && rm -rf atest && sudo atest service install && sudo atest service start && exit
+atest
+Error response from daemon: page not found
+Error: failed to start containers:
+Error: exit status 1
+Usage:
+  atest service [flags]
+
+Aliases:
+  service, s
+
+Examples:
+atest service install
+atest service start
+
+Flags:
+  -h, --help                   help for service
+      --image string           The image of the service which as a container (default "linuxsuren.docker.scarf.sh/linuxsuren/api-testing")
+      --local-storage string   The local storage path which will be mounted into the container (default "/var/data/atest")
+  -m, --mode string            Availeble values: [os container podman docker]
+      --pull string            Pull image before creating ("always"|"missing"|"never") (default "always")
+      --script-path string     The service script file path
+      --secret-server string   The secret server URL
+      --skywalking string      Push the browser tracing data to the Apache SkyWalking URL
+      --version string         The version of the service image (default "0.0.20")
+
+gitpod /workspace/stockcar_racing (dependabot/npm_and_yarn/npm_and_yarn-e04d5d616f) $ 
