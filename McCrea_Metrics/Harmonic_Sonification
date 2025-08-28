@@ -1,0 +1,582 @@
+Reality Protocol LLC 
+Sheridan, WY. 303-641-2342
+
+Orions Sounds of Rangi "McCrea_Market_Metrics"
+****sonicUpdate(hriValue, sssValue, changePercent);
+****sonicUpdate(hriValue, sssValue, changePercent);
+*****
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orion's Rangi - Bitcoin HSI & SSS Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --cosmic-blue: #0a0e17;
+            --nebula-purple: #4a1b6d;
+            --star-gold: #ffd700;
+            --orion-silver: #c0c0c0;
+            --rangi-blue: #1e3a8a;
+            --bitcoin-orange: #F7931A;
+            --positive-green: #00ff8b;
+            --negative-red: #ff3860;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, var(--cosmic-blue), var(--nebula-purple));
+            color: white;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--star-gold), var(--bitcoin-orange));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+        }
+        
+        .subtitle {
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+        
+        .bitcoin-price {
+            font-size: 1.5rem;
+            color: var(--bitcoin-orange);
+            margin: 10px 0;
+        }
+        
+        .indicators-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (max-width: 900px) {
+            .indicators-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .indicator-panel {
+            background: rgba(10, 14, 23, 0.8);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+        }
+        
+        .panel-title {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--star-gold);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .value-display {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .value {
+            font-size: 4rem;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        
+        .hri-value {
+            color: var(--star-gold);
+            text-shadow: 0 0 10px var(--star-gold);
+        }
+        
+        .sss-value {
+            color: var(--positive-green);
+            text-shadow: 0 0 10px var(--positive-green);
+        }
+        
+        .gauge-container {
+            width: 100%;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            margin: 20px 0;
+            position: relative;
+        }
+        
+        .gauge-fill {
+            height: 100%;
+            border-radius: 15px;
+            transition: width 1s ease-in-out;
+        }
+        
+        .hri-gauge {
+            background: linear-gradient(90deg, var(--negative-red), var(--star-gold));
+        }
+        
+        .sss-gauge {
+            background: linear-gradient(90deg, var(--negative-red), var(--positive-green));
+        }
+        
+        .gauge-marks {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            position: absolute;
+            top: -20px;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }
+        
+        .chart-container {
+            background: rgba(30, 58, 138, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            height: 300px;
+        }
+        
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .metric-card {
+            background: rgba(10, 14, 23, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        
+        .metric-title {
+            font-size: 1.2rem;
+            color: var(--orion-silver);
+            margin-bottom: 10px;
+        }
+        
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--star-gold);
+        }
+        
+        .positive {
+            color: var(--positive-green);
+        }
+        
+        .negative {
+            color: var(--negative-red);
+        }
+        
+        .frequency-display {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(30, 58, 138, 0.3);
+            border-radius: 15px;
+        }
+        
+        .frequency-value {
+            font-size: 3rem;
+            color: var(--star-gold);
+            margin: 10px 0;
+            text-shadow: 0 0 15px var(--star-gold);
+        }
+        
+        .frequency-label {
+            font-size: 1.2rem;
+            opacity: 0.8;
+        }
+        
+        .cosmic-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 5s infinite;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.2; }
+            50% { opacity: 1; }
+        }
+        
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: rgba(10, 14, 23, 0.9);
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 10px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: 1px solid var(--star-gold);
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="cosmic-animation" id="cosmicAnimation"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Orion's Rangi</h1>
+            <p class="subtitle">Harmonic Resonance Indicator & Sonic Stability Score for Bitcoin</p>
+            <div class="bitcoin-price">
+                <i class="fab fa-bitcoin"></i> BTC/USD: <span id="btcPrice">$64,321.10</span>
+                <span id="btcChange" class="positive">+2.5%</span>
+            </div>
+        </header>
+        
+        <div class="indicators-grid">
+            <div class="indicator-panel">
+                <h2 class="panel-title">
+                    <i class="fas fa-wave-square"></i> Harmonic Resonance Indicator (HRI)
+                    <div class="tooltip">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="tooltiptext">Measures the harmonic patterns and cyclicality in Bitcoin's price movements. Higher values indicate stronger resonance.</span>
+                    </div>
+                </h2>
+                
+                <div class="value-display">
+                    <div class="value hri-value" id="hriValue">72.6</div>
+                    <div>Resonance Level: <span id="resonanceLevel">High</span></div>
+                </div>
+                
+                <div class="gauge-container">
+                    <div class="gauge-fill hri-gauge" id="hriGauge" style="width: 72.6%;"></div>
+                    <div class="gauge-marks">
+                        <span>0</span>
+                        <span>25</span>
+                        <span>50</span>
+                        <span>75</span>
+                        <span>100</span>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="hriChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="indicator-panel">
+                <h2 class="panel-title">
+                    <i class="fas fa-shield-alt"></i> Sonic Stability Score (SSS)
+                    <div class="tooltip">
+                        <i class="fas fa-info-circle"></i>
+                        <span class="tooltiptext">Measures the stability and low volatility characteristics of Bitcoin's price. Higher values indicate greater stability.</span>
+                    </div>
+                </h2>
+                
+                <div class="value-display">
+                    <div class="value sss-value" id="sssValue">84.3</div>
+                    <div>Stability Level: <span id="stabilityLevel">Very High</span></div>
+                </div>
+                
+                <div class="gauge-container">
+                    <div class="gauge-fill sss-gauge" id="sssGauge" style="width: 84.3%;"></div>
+                    <div class="gauge-marks">
+                        <span>0</span>
+                        <span>25</span>
+                        <span>50</span>
+                        <span>75</span>
+                        <span>100</span>
+                    </div>
+                </div>
+                
+                <div class="chart-container">
+                    <canvas id="sssChart"></canvas>
+                </div>
+            </div>
+        </div>
+        
+        <div class="metrics-grid">
+            <div class="metric-card">
+                <div class="metric-title">24h Volatility</div>
+                <div class="metric-value positive">1.8%</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Market Sentiment</div>
+                <div class="metric-value positive">Bullish</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Trend Strength</div>
+                <div class="metric-value">Strong</div>
+            </div>
+            
+            <div class="metric-card">
+                <div class="metric-title">Cycle Phase</div>
+                <div class="metric-value">Accumulation</div>
+            </div>
+        </div>
+        
+        <div class="frequency-display">
+            <div class="frequency-label">Current Fundamental Frequency</div>
+            <div class="frequency-value">432 Hz</div>
+            <div class="frequency-label">Orion's Rangi is in harmonic alignment</div>
+        </div>
+        
+        <footer>
+            <p>Orion's Rangi &copy; 2023 | The cosmic harmony of markets</p>
+            <p>Data updates every 5 minutes | Next update in <span id="countdown">4:32</span></p>
+        </footer>
+    </div>
+
+    <script>
+        // Create cosmic background animation
+        function createCosmicBackground() {
+            const container = document.getElementById('cosmicAnimation');
+            for (let i = 0; i < 150; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                star.style.width = Math.random() * 3 + 'px';
+                star.style.height = star.style.width;
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 5 + 's';
+                container.appendChild(star);
+            }
+        }
+        
+        // Initialize charts
+        function initCharts() {
+            // HRI Chart
+            const hriCtx = document.getElementById('hriChart').getContext('2d');
+            const hriChart = new Chart(hriCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'HRI Value',
+                        data: [45, 52, 48, 60, 65, 68, 72, 70, 69, 72, 71, 73],
+                        borderColor: '#ffd700',
+                        backgroundColor: 'rgba(255, 215, 0, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 40,
+                            max: 80,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // SSS Chart
+            const sssCtx = document.getElementById('sssChart').getContext('2d');
+            const sssChart = new Chart(sssCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+                    datasets: [{
+                        label: 'SSS Value',
+                        data: [65, 68, 72, 75, 70, 78, 80, 82, 79, 83, 84, 84],
+                        borderColor: '#00ff8b',
+                        backgroundColor: 'rgba(0, 255, 139, 0.1)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 60,
+                            max: 90,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+            
+            return { hriChart, sssChart };
+        }
+        
+        // Update values with slight random fluctuations
+        function updateValues() {
+            // HRI value between 65-85
+            const hriValue = 70 + Math.random() * 15;
+            document.getElementById('hriValue').textContent = hriValue.toFixed(1);
+            document.getElementById('hriGauge').style.width = `${hriValue}%`;
+            
+            // Set resonance level based on value
+            let resonanceLevel = 'Medium';
+            if (hriValue > 80) resonanceLevel = 'Very High';
+            else if (hriValue > 70) resonanceLevel = 'High';
+            else if (hriValue > 60) resonanceLevel = 'Medium';
+            else if (hriValue > 50) resonanceLevel = 'Low';
+            else resonanceLevel = 'Very Low';
+            
+            document.getElementById('resonanceLevel').textContent = resonanceLevel;
+            
+            // SSS value between 75-90
+            const sssValue = 78 + Math.random() * 12;
+            document.getElementById('sssValue').textContent = sssValue.toFixed(1);
+            document.getElementById('sssGauge').style.width = `${sssValue}%`;
+            
+            // Set stability level based on value
+            let stabilityLevel = 'High';
+            if (sssValue > 85) stabilityLevel = 'Very High';
+            else if (sssValue > 75) stabilityLevel = 'High';
+            else if (sssValue > 65) stabilityLevel = 'Medium';
+            else if (sssValue > 55) stabilityLevel = 'Low';
+            else stabilityLevel = 'Very Low';
+            
+            document.getElementById('stabilityLevel').textContent = stabilityLevel;
+            
+            // Update Bitcoin price with slight random change
+            const currentPrice = parseFloat(document.getElementById('btcPrice').textContent.replace('$', '').replace(',', ''));
+            const changePercent = (Math.random() - 0.45) * 0.4; // -0.18% to +0.18%
+            const newPrice = currentPrice * (1 + changePercent);
+            
+            document.getElementById('btcPrice').textContent = `$${newPrice.toLocaleString('en-US', {maximumFractionDigits: 2})}`;
+            
+            const changeElement = document.getElementById('btcChange');
+            if (changePercent >= 0) {
+                changeElement.textContent = `+${(changePercent * 100).toFixed(2)}%`;
+                changeElement.className = 'positive';
+            } else {
+                changeElement.textContent = `${(changePercent * 100).toFixed(2)}%`;
+                changeElement.className = 'negative';
+            }
+        }
+        
+        // Initialize countdown timer
+        function initCountdown() {
+            let seconds = 300; // 5 minutes
+            
+            setInterval(() => {
+                seconds--;
+                if (seconds < 0) {
+                    seconds = 300;
+                    updateValues();
+                }
+                
+                const minutes = Math.floor(seconds / 60);
+                const remainingSeconds = seconds % 60;
+                document.getElementById('countdown').textContent = `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+            }, 1000);
+        }
+        
+        // Initialize the dashboard
+        function initDashboard() {
+            createCosmicBackground();
+            initCharts();
+            updateValues();
+            initCountdown();
+            
+            // Update values every 5 minutes (simulated with more frequent updates for demo)
+            setInterval(updateValues, 300000);
+        }
+        
+        // Start the dashboard when the page loads
+        window.onload = initDashboard;
+    </script>
+</body>
+</html>
