@@ -1,0 +1,4 @@
+public void ApplyCustomPaint(Material newPaint) {
+    vehicleRenderer.materials[0] = newPaint;
+    ApplyDirtMask(); // Preserve grime layers
+}
