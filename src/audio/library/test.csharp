@@ -1,0 +1,4 @@
+// Test in browser console
+const audioContext = new AudioContext();
+const panner = audioContext.createPanner();
+panner.setPosition(5, 0, 0);
