@@ -1,0 +1,6 @@
+graph TD
+    A[Magnus Reference] --> B[Style Analysis]
+    B --> C[Asset Production]
+    C --> D[Shader Implementation]
+    D --> E[Lighting Setup]
+    E --> F[Post-Processing]
