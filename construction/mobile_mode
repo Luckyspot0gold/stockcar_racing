@@ -1,0 +1,5 @@
+graph TB
+    A[High-End PC Reference] --> B[Mobile Adaptation]
+    B --> C[Texture Streaming]
+    B --> D[LOD Optimization]
+    B --> E[Shader Complexity Reduction]
