@@ -1,3 +1,4 @@
 # Create audio directories
 mkdir -p Assets/Audio/{Market,UI,Ambience}
 mkdir -p Assets/Scripts/Audio
+npm install tone wavesurfer.js howler
