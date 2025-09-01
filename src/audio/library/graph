@@ -1,0 +1,11 @@
+graph TD
+    A[Market Data Feed] --> B{Harmonic Audio Engine}
+    B --> C[3D Spatial Processor]
+    C --> D[Web Audio API]
+    C --> E[HRTF Processing]
+    D --> F[Left Channel]
+    D --> G[Right Channel]
+    E --> H[3D Spatialization]
+    F --> I[Headphones/Speakers]
+    G --> I
+    H --> I
