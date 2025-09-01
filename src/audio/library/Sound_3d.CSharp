@@ -1,0 +1,140 @@
+using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+
+[RequireComponent(typeof(AudioListener))]
+public class MarketSpatialAudioManager : MonoBehaviour
+{
+    public static MarketSpatialAudioManager Instance;
+    
+    [System.Serializable]
+    public class MarketInstrument
+    {
+        public string symbol; // BTC, ETH, SOL
+        public AudioClip riseClip;
+        public AudioClip fallClip;
+        public AudioClip volatilityClip;
+        [Range(0f, 2f)] public float baseVolume = 0.7f;
+        public float maxDistance = 100f;
+        public Vector3 defaultPosition;
+    }
+
+    public MarketInstrument[] marketInstruments;
+    public GameObject audioEmitterPrefab;
+    
+    private Dictionary<string, AudioSource> audioEmitters = new Dictionary<string, AudioSource>();
+    private Dictionary<string, MarketInstrument> instrumentMap = new Dictionary<string, MarketInstrument>();
+    
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            InitializeSpatialAudio();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    
+    void InitializeSpatialAudio()
+    {
+        // Create audio emitters for each instrument
+        foreach (var instrument in marketInstruments)
+        {
+            GameObject emitterObj = Instantiate(audioEmitterPrefab, transform);
+            emitterObj.name = $"{instrument.symbol}_Emitter";
+            
+            AudioSource source = emitterObj.GetComponent<AudioSource>();
+            source.spatialBlend = 1.0f; // Full 3D
+            source.rolloffMode = AudioRolloffMode.Logarithmic;
+            source.maxDistance = instrument.maxDistance;
+            source.dopplerLevel = 0.5f;
+            source.playOnAwake = false;
+            
+            // Position in 3D space (could be based on market cap)
+            emitterObj.transform.localPosition = instrument.defaultPosition;
+            
+            audioEmitters[instrument.symbol] = source;
+            instrumentMap[instrument.symbol] = instrument;
+        }
+    }
+    
+    public void PlayMarketMovement(string symbol, float changePercent, float volatility)
+    {
+        if (!audioEmitters.ContainsKey(symbol)) return;
+        
+        AudioSource source = audioEmitters[symbol];
+        MarketInstrument instrument = instrumentMap[symbol];
+        
+        // Determine which clip to play based on market movement
+        AudioClip clip = changePercent >= 0 ? instrument.riseClip : instrument.fallClip;
+        
+        // Calculate volume based on change magnitude
+        float volume = instrument.baseVolume * Mathf.Clamp01(Mathf.Abs(changePercent) / 10f);
+        
+        // Calculate pitch based on volatility
+        float pitch = 1f + (volatility * 0.5f);
+        
+        // Spatial positioning based on market behavior
+        Vector3 newPosition = CalculateSpatialPosition(changePercent, volatility);
+        source.transform.localPosition = newPosition;
+        
+        // Play the sound
+        source.clip = clip;
+        source.volume = volume;
+        source.pitch = pitch;
+        source.Play();
+        
+        // Optional: Play volatility overlay
+        if (volatility > 0.7f && instrument.volatilityClip != null)
+        {
+            StartCoroutine(PlayVolatilityEffect(source, instrument.volatilityClip, volatility));
+        }
+    }
+    
+    private Vector3 CalculateSpatialPosition(float changePercent, float volatility)
+    {
+        // Map market data to 3D space:
+        // X-axis: Time (automatic movement)
+        // Y-axis: Price change (up/down)
+        // Z-axis: Volatility (depth)
+        
+        return new Vector3(
+            Mathf.PingPong(Time.time * 0.5f, 20f) - 10f, // Moving left/right over time
+            Mathf.Clamp(changePercent * 2f, -10f, 10f),   // Up/down based on price
+            Mathf.Clamp(volatility * 15f, 5f, 20f)        // Depth based on volatility
+        );
+    }
+    
+    private IEnumerator PlayVolatilityEffect(AudioSource source, AudioClip clip, float intensity)
+    {
+        yield return new WaitForSeconds(source.clip.length * 0.5f);
+        c
+        // Add volatility as a layered sound
+        AudioSource.PlayClipAtPoint(clip, source.transform.position, intensity);
+    }
+    
+    // Public method to update all market sounds
+    public void UpdateMarketAudio(Dictionary<string, MarketData> marketData)
+    {
+        foreach (var data in marketData)
+        {
+            if (audioEmitters.ContainsKey(data.Key))
+            {
+                PlayMarketMovement(data.Key, data.Value.changePercent, data.Value.volatility);
+            }
+        }
+    }
+}
+
+[System.Serializable]
+public class MarketData
+{
+    public string symbol;
+    public float changePercent;
+    public float volatility;
+    public float volume;
+}
