@@ -1,10 +1,10 @@
-# Wyoming Protocol 7 - Cryptocurrency Racing Game
+# Reality Protocol LLC  - Crypto Clashers Racing Game
 
 A real-time cryptocurrency racing game where car speeds are determined by live market data from major exchanges.
 
 ## 🏎️ Features
 
-### Wyoming Protocol 7 Requirements ✅
+### Reality Protocol 7 Requirements ✅
 - **Market Data Refresh**: Every 15 seconds using CCXT
 - **Visual Jitter Effects**: Cars jitter during high volatility periods
 - **StoneVerse Color Scheme**: Gold and purple Wyoming-themed design
@@ -100,9 +100,9 @@ Set `DEBUG_MODE=true` in `.env` to enable:
 - Performance metrics display
 - API call monitoring
 
-## 🎯 Wyoming Protocol 7 Compliance
+## 🎯 Reality Protocol LLC Compliance
 
-This implementation fully complies with Wyoming Protocol 7 requirements:
+This implementation fully complies with requirements:
 - ✅ 15-second market refresh cycle
 - ✅ High volatility visual effects
 - ✅ StoneVerse gold/purple color scheme
@@ -124,4 +124,4 @@ This implementation fully complies with Wyoming Protocol 7 requirements:
 
 ---
 
-**StoneVerse Gaming** - Wyoming Protocol 7 Certified 🏆
+**Crypto Clashers Games** - Wyoming Protocol 7 Certified 🏆 www.RealityPrtocol.io www.CryptoClashers.games
